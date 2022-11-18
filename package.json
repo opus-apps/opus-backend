@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
@@ -16,6 +17,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
+=======
+  "name": "opus-backend",
+  "version": "1.0.0",
+  "description": "backend opus lalala",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> 0ef3cd5aa4ba0ed2ce0e2af2a6bccf33036256a2
   },
   "repository": {
     "type": "git",
@@ -27,5 +36,17 @@
   "bugs": {
     "url": "https://github.com/opus-apps/opus-backend/issues"
   },
+<<<<<<< HEAD
   "homepage": "https://github.com/opus-apps/opus-backend#readme"
+=======
+  "homepage": "https://github.com/opus-apps/opus-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1"
+  }
+>>>>>>> 0ef3cd5aa4ba0ed2ce0e2af2a6bccf33036256a2
 }
