@@ -1,6 +1,6 @@
 "use strict";
 
-require("dotenv").config();
+require("dotenv").config;
 
 const mysql = require("mysql");
 const DBConfig = require("./db.config");
@@ -15,7 +15,7 @@ const connectDB = mysql.createConnection({
 
 connectDB.connect((err) => {
   if (err) throw err;
-  console.log("Database connection established");
+  console.log("Database connected ...");
 });
 
 module.exports = connectDB;
