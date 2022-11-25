@@ -1,6 +1,6 @@
 "use strict";
 
-require("dotenv").config;
+require("dotenv").config();
 
 const mysql = require("mysql");
 const DBConfig = require("./db.config");
@@ -8,14 +8,8 @@ const DBConfig = require("./db.config");
 const connectDB = mysql.createConnection({
   host: DBConfig.HOST,
   port: DBConfig.PORT,
-  password: DBConfig.PASSWORD,
-  username: DBConfig.USERNAME,
+  user: DBConfig.USER,
   database: DBConfig.DB,
-});
-
-connectDB.connect((err) => {
-  if (err) throw err;
-  console.log("Database connected ...");
 });
 
 module.exports = connectDB;

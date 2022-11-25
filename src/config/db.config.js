@@ -1,9 +1,8 @@
 "use strict";
-require('dotenv').config();
+require("dotenv").config;
 module.exports = {
-    HOST: process.env.HOST,
-    PORT: process.env.PORT,
-    PASSWORD: process.env.PASSWORD,
-    USERNAME: process.env.USENAME,
-    DB: process.env.DB,
-}
+  HOST: process.env.HOST,
+  PORT: process.env.PORT,
+  USER: process.env.USER,
+  DB: process.env.DB,
+};
