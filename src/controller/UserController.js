@@ -16,31 +16,33 @@ class UserController {
       }
     });
   }
-  static async getUsersById(req, res) {
-    User.showAllUserById((err, data) => {
+  static getUsersById(req, res) {
+    let id = req.params.id;
+    User.showUserById(id, (err, data) => {
       if (err) {
-        console.log("Not Connected", err);
+        res.json({
+          statusCode: 404,
+          message: "error",
+          err,
+        });
       } else {
         res.status(200).json({
-          title: "Users",
-          message: "Hasil Semua Data user by id",
+          message: "success",
           data,
         });
       }
     });
   }
-  static async newUser(req, res) {
-    let payload = req.body;
+
+  static async newUser(req, res, next) {
+    let payload = await req.body;
     User.createUser(payload, (err, data) => {
       if (err) {
-        console.log("Not Connected", err);
+        res.json("Error", err);
       } else {
-        res.status(200).json({
-          title: "Users",
-          message: "Berhasil menambahkan data User...",
-          data,
-        });
+        res.status(200).json({ message: "success", data });
       }
+      next();
     });
   }
 }

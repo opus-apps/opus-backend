@@ -2,16 +2,18 @@
 const sql = require("../config/db");
 
 class User {
-  constructor(id, nama, password, tanggal_lahir, email) {
+  constructor(id, usename, password) {
     this.id = id;
-    this.nama = nama;
+    this.usename = usename;
     this.password = password;
-    this.tanggal_lahir = tanggal_lahir;
-    this.email = email;
+
+    // this.alamat = alamat;
+    // this.no_telp = no_telp;
+    // this.jenis_kelamin = jenis_kelamin;
   }
 
   static async showAllUser(result) {
-    let sqlQuery = `SELECT * FROM users`;
+    let sqlQuery = `SELECT * FROM user`;
     sql.query(sqlQuery, (err, res) => {
       if (err) {
         console.log(null, err);
@@ -21,7 +23,7 @@ class User {
         let user;
 
         rawData.forEach((eachData) => {
-          user = new User(eachData.nama, eachData.password, eachData.tanggal_lahir, eachData.email);
+          user = new User(eachData.id, eachData.usename, eachData.password);
           users.push(user);
         });
         console.log("Data all users =>", rawData);
@@ -29,43 +31,37 @@ class User {
       }
     });
   }
-  static async createUser(data, result) {
-    let sqlQuery = `INSERT INTO users SET ?`;
+  static showUserById(id, data, result) {
+    let sqlQuery = `SELECT * FROM user WHERE id=${id}`;
     sql.query(sqlQuery, data, (err, res) => {
-      if (err) {
-        console.log(null, "Data gagal ditambahkan... ", err);
-      } else {
-        let rawData = JSON.parse(JSON.stringify(res));
-        let users = [];
-        let user;
+      if (err) throw err;
+      let rawData = JSON.parse(JSON.stringify(res));
+      let users = [];
+      let user;
 
-        rawData.forEach((eachData) => {
-          user = new User(eachData.nama, eachData.password, eachData.alamat, eachData.no_telp, eachData.jenis_kelamin);
-          users.push(user);
-        });
-        console.log("Data users baru ditambahkan =>", rawData);
-        result(null, users);
-      }
+      rawData.forEach((eachData) => {
+        user = new User(eachData.id, eachData.usename, eachData.password);
+        users.push(user);
+      });
+      console.log("Data all users =>", rawData);
+      result(null, users);
     });
   }
-  static async ShowAllUserById(id, result) {
-    let sqlQuery = `SELECT * FROM users WHERE id=${id}`;
-    sql.query(sqlQuery, (err, res) => {
-      if (err) {
-        console.log(null, err);
-      } else {
-        let rawData = JSON.parse(JSON.stringify(res));
-        let users = [];
-        let user;
 
-        rawData.forEach((eachData) => {
-          user = new User(eachData.nama, eachData.password, eachData.alamat, eachData.no_telp, eachData.jenis_kelamin);
-          users.push(user);
-        });
-        console.log("Data all users =>", rawData);
-        result(null, users);
-      }
-    });
+  static createUser(data, result) {
+    let sqlQuery = `INSERT INTO user SET ?`;
+    try {
+      sql.query(sqlQuery, data, (err, res) => {
+        if (err) {
+          console.log("data gagal ditambahkan", err);
+          result(res, null);
+        } else {
+          result(true, res);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 
